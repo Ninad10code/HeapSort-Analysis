@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'buildHeap.dart';
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -58,8 +58,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               child: FlatButton(
-                onPressed: (){
-                  print('button is clicked');
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return BuildHeap(input: input);
+                      },
+                    ),
+                  );
                 },
                 child: Text(
                     'Submit',
