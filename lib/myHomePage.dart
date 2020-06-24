@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'buildHeap.dart';
+import 'asciiList.dart';
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -8,7 +10,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String input;
-
+  int length;
+  List asciiList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 onChanged: (String value){
                   input=value;
+                  length=input.length;
+                  AsciiList array= AsciiList(word: input);
+                  asciiList=array.function(input);
+
                 },
               ),
 
@@ -63,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return BuildHeap(input: input);
+                        return BuildHeap(input: input,length: length,array: asciiList,);
                       },
                     ),
                   );
