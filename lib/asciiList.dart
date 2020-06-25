@@ -8,12 +8,17 @@ class AsciiList
     this.word=word;
     length=word.length;
     asci.length=length;
+    print('word $word');
+    print('length $length');
   }
-  List function(String word)
+  List function()
   {
+    print('word $word');
+    print('length $length');
     for(int i=0;i<length;i++)
       {
-        asci[i]=word[i].codeUnitAt(i);
+        asci[i]=word.codeUnitAt(i);
+        print('ascii value $asci[i]');
       }
     return asci ;
   }
