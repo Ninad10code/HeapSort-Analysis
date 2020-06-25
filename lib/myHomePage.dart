@@ -55,8 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 onChanged: (String value){
                   input=value;
                   length=input.length;
-                  AsciiList array= AsciiList(word: input);
-                  asciiList=array.function(input);
+                  print(input);
+
+                },
+                onFieldSubmitted: (String value){
+                  print('value $value');
+                  input=value;
 
                 },
               ),
@@ -66,10 +70,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               child: FlatButton(
                 onPressed: () {
+                  AsciiList array= AsciiList(word: input);
+                  asciiList=array.function();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
+
                         return BuildHeap(input: input,length: length,array: asciiList,);
                       },
                     ),
