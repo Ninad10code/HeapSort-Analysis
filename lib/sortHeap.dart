@@ -1,33 +1,27 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'buildSort.dart';
-import 'sortHeap.dart';
-
-class BuildHeap extends StatefulWidget {
-  BuildHeap({this.input, this.length, this.array});
+import 'heapSort.dart';
+import 'myHomePage.dart';
+class SortHeap extends StatefulWidget {
+  SortHeap({this.input, this.length, this.array});
   final String input;
   final int length;
   final List array;
-
   @override
-  _BuildHeapState createState() =>
-      _BuildHeapState(input: input, length: length, array: array);
+  _SortHeapState createState() =>
+      _SortHeapState(input: input, length: length, array: array);
 }
 
-class _BuildHeapState extends State<BuildHeap> {
-  _BuildHeapState({this.input, this.length, this.array});
+class _SortHeapState extends State<SortHeap> {
+  int index = 0;
+  _SortHeapState({this.input, this.length, this.array});
   final String input;
   final int length;
   List array;
-  BuildSort heapify = BuildSort();
-
-  int index = 0;
+  HeapSort heapiSort = HeapSort();
 
   bool validate = true;
   void nextStep() {
-    if (index == length - 3) {
+    if (index == length - 1) {
       validate = false;
     }
   }
@@ -78,19 +72,16 @@ class _BuildHeapState extends State<BuildHeap> {
                 margin: EdgeInsets.all(5.0),
                 padding: EdgeInsets.all(10.0),
                 child: Visibility(
-                  visible: heapify.isBuildComplete(array,index, length),
+                  visible: !validate,
                   child: Text(
-                      'Build is complete',
+                    'Sorting is completed',
                     style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 1.0,
 
 //                      backgroundColor: Colors.green,
-
-
                     ),
-
                   ),
                 )),
             Container(
@@ -117,43 +108,45 @@ class _BuildHeapState extends State<BuildHeap> {
                   }),
                 )),
             Container(
-                margin: EdgeInsets.all(5.0),
-                padding: EdgeInsets.all(10.0),
-                child: Visibility(
-                  visible: !heapify.isBuildComplete(array, index, length),
-                  child: GestureDetector(
-                    onTap: () {
-                      nextStep();
-                      setState(() {
-                        if (validate) {
-                          array = heapify.iterateFunction(array, length, index);
-                          index++;
-                        }
-                      });
-                      print('objectnext button is pressed');
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(5.0),
-                      padding: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(10.0),
+              child: Visibility(
+                visible: validate,
+                child: GestureDetector(
+                  onTap: () {
+                    nextStep();
+                    setState(() {
+                      if (validate) {
+                        array = heapiSort.sortFunction(
+                            array, length, length - index - 1);
+                        index++;
+                      }
+                    });
+                    print('objectnext button is pressed');
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(5.0),
+                    padding: EdgeInsets.all(10.0),
 //
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadiusDirectional.circular(4.0)),
-                      child: Text(
-                        'next',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.white,
-                          letterSpacing: 1.0,
-                        ),
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadiusDirectional.circular(4.0)),
+                    child: Text(
+                      'next',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        letterSpacing: 1.0,
                       ),
                     ),
                   ),
-                ),),
+                ),
+              ),
+            ),
             Container(
               child: Visibility(
-                visible: heapify.isBuildComplete(array, index, length),
+                visible: !validate,
                 child: FlatButton(
                   onPressed: () {
 
@@ -162,13 +155,13 @@ class _BuildHeapState extends State<BuildHeap> {
                       MaterialPageRoute(
                         builder: (context) {
 
-                          return SortHeap(input: input,length: length,array: array);
+                          return MyHomePage();
                         },
                       ),
                     );
                   },
                   child: Text(
-                    'Proceed to sort',
+                    'Back to Home page',
                     style: TextStyle(
                       color: Colors.white,
                     ),
