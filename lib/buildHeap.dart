@@ -3,16 +3,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'buildSort.dart';
+import 'sortHeap.dart';
 
-//class BuilHeapPage extends StatelessWidget {
-//  BuildHeapPage({@required this.input});
-//  final String input;
-//  @override
-//
-//  Widget build(BuildContext context) {
-//    return BuildHeap();
-//  }
-//}
 class BuildHeap extends StatefulWidget {
   BuildHeap({this.input, this.length, this.array});
   final String input;
@@ -170,7 +162,7 @@ class _BuildHeapState extends State<BuildHeap> {
                       MaterialPageRoute(
                         builder: (context) {
 
-                          return ;
+                          return SortHeap(input: input,length: length,array: array);
                         },
                       ),
                     );
