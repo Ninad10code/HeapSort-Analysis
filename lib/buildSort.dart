@@ -24,6 +24,43 @@ class BuildSort
     return array;
   }
 
+  List autoIncrementFunction(List array,int length)
+  {
+    print('length $length');
+    print('length/2 ${length/2}');
+
+    for(int i=0;i<length;i++)
+      {
+        int largest=i;
+        int l=2*i+1;
+        int r=2*i+2;
+        print('l $l');
+        print('r $r');
+
+        if(l<length && array[l]>array[largest])
+        {
+          largest=l;
+          print('largest l ${array[l]}');
+        }
+
+        if(r<length && array[r]>array[largest])
+        {
+          largest=r;
+          print('largest r ${array[r]}');
+
+        }
+
+        if(largest!=i)
+        {
+          int temp=array[i];
+          array[i]=array[largest];
+          array[largest]=temp;
+        }
+      }
+    print('after sort $array');
+    return array;
+  }
+
   bool isBuildComplete(List array,int index,int length)
   {
     bool status;
