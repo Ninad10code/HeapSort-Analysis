@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +20,7 @@ class _BuildHeapState extends State<BuildHeap> {
   _BuildHeapState({this.input, this.length, this.array});
   final String input;
   final int length;
+  int pinIndex;
   List array;
   BuildSort heapify = BuildSort();
 
@@ -27,7 +28,7 @@ class _BuildHeapState extends State<BuildHeap> {
 
   bool validate = true;
   void nextStep() {
-    if (index == length - 3) {
+    if (pinIndex==0) {
       validate = false;
     }
   }
@@ -78,7 +79,7 @@ class _BuildHeapState extends State<BuildHeap> {
                 margin: EdgeInsets.all(5.0),
                 padding: EdgeInsets.all(10.0),
                 child: Visibility(
-                  visible: heapify.isBuildComplete(array,index, length),
+                  visible: heapify.isBuildComplete(pinIndex),
                   child: Text(
                       'Build is complete',
                     style: TextStyle(
@@ -120,13 +121,14 @@ class _BuildHeapState extends State<BuildHeap> {
                 margin: EdgeInsets.all(5.0),
                 padding: EdgeInsets.all(10.0),
                 child: Visibility(
-                  visible: !heapify.isBuildComplete(array, index, length),
+                  visible: !heapify.isBuildComplete(pinIndex),
                   child: GestureDetector(
                     onTap: () {
                       nextStep();
                       setState(() {
                         if (validate) {
-                          array = heapify.iterateFunction(array, length, index);
+                          pinIndex=((length~/2).toInt()-1-index);
+                          array = heapify.iterateFunction(array, length,pinIndex);
                           index++;
                         }
                       });
@@ -153,7 +155,7 @@ class _BuildHeapState extends State<BuildHeap> {
                 ),),
             Container(
               child: Visibility(
-                visible: heapify.isBuildComplete(array, index, length),
+                visible: heapify.isBuildComplete(pinIndex),
                 child: FlatButton(
                   onPressed: () {
 
