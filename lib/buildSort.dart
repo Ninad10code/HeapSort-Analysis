@@ -61,10 +61,10 @@ class BuildSort
     return array;
   }
 
-  bool isBuildComplete(List array,int index,int length)
+  bool isBuildComplete(int index)
   {
     bool status;
-    if(index==length-3)
+    if(index==0)
       {
         status=true;
       }
